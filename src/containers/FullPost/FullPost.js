@@ -23,7 +23,7 @@ class FullPost extends Component {
 
     loadData () {
         if (this.props.match.params.id) {
-            if (!this.state.loadedPosts || (this.state.loadedPosts && this.state.loadedPosts.id != this.props.match.params.id)) {
+            if (!this.state.loadedPosts || (this.state.loadedPosts && this.state.loadedPosts.id !== +this.props.match.params.id)) {
                     axios.get('/posts/'+ this.props.match.params.id)
                     .then(response => {
                         if(this._isMounted){
