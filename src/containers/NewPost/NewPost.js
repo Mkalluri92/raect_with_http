@@ -25,7 +25,11 @@ class NewPost extends Component {
         axios.post('/posts', data)
         .then (response => {
             console.log(response);
-            this.setState({submitted: true})
+            this.props.history.push('/posts')
+            //this.props.history.replace('/posts);
+           // this.setState({submitted: true})
+           //redirect and replace the current page we cannot go backwards
+           // but push it stacks so we can go backwards
         })
     }
 
