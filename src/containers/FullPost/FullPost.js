@@ -5,21 +5,31 @@ import './FullPost.css';
 
 class FullPost extends Component {
 
+    _isMounted = false;
+
     state = {
         loadedPosts: null
     }
 
-    componentDidUpdate() {
-        if (this.props.id) {
-            if (!this.state.loadedPosts || (this.state.loadedPosts && this.state.loadedPosts.id !== this.props.id)) {
-                    axios.get('/posts/'+ this.props.id)
+    componentDidMount() {
+        console.log(this.props);
+        this._isMounted = true;
+        if (this.props.match.params.id) {
+            if (!this.state.loadedPosts || (this.state.loadedPosts && this.state.loadedPosts.id !== this.props.match.params.id)) {
+                    axios.get('/posts/'+ this.props.match.params.id)
                     .then(response => {
-                        this.setState({
-                            loadedPosts: response.data
-                        })
+                        if(this._isMounted){
+                            this.setState({
+                                loadedPosts: response.data
+                            })
+                        }
                     })
             }
         }
+    }
+
+    componentWillUnmount () {
+        this._isMounted= false;
     }
 
    deletePostHandler = () => {

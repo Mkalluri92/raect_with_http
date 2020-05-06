@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Posts from '../Posts/Posts';
 import NewPost from '../NewPost/NewPost';
 import classes from './Blog.module.css';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import FullPost from '../FullPost/FullPost';
 
 class Blog extends Component {
@@ -22,7 +22,7 @@ class Blog extends Component {
                                 activeStyle={{
                                     color: '#fa923f'
                                 }}>
-                                    Home
+                                    Posts
                                 </NavLink></li>
                             <li><NavLink 
                                 to={{
@@ -38,9 +38,11 @@ class Blog extends Component {
                     </nav>
                 </header>
                 {/*<Route path="/" exact render={() => <Posts />}  /> */}
-                <Route path="/" exact component={Posts} />
-                <Route path="/new-post" exact component={NewPost} />
-                <Route path="/:id" exact component={FullPost} />
+                <Switch>
+                    <Route path="/" exact component={Posts} />
+                    <Route path="/new-post" exact component={NewPost} />
+                    <Route path="/:id" exact component={FullPost} />
+                </Switch>
             </div>
         );
     }
